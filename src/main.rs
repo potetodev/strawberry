@@ -34,8 +34,12 @@ async fn fetch_file(Path(file_path): Path<String>) -> impl IntoResponse {
 #[tokio::main]
 async fn main() {
     let app = Route::new().at("/*file_path", get(fetch_file));
+    let address = format!(
+        "0.0.0.0:{}",
+        std::env::var("PORT").unwrap_or("8000".to_string())
+    );
 
-    Server::new(TcpListener::bind("127.0.0.1:8000"))
+    Server::new(TcpListener::bind(address))
         .run(app)
         .await
         .unwrap();
