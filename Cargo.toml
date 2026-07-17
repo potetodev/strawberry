@@ -2,9 +2,15 @@
 name = "poteto-cdn"
 version = "0.1.0"
 edition = "2024"
+default-run = "main"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
 
 [dependencies]
-aws-config = "1.8.18"
+aws-config = { version = "1.8.18", features = ["behavior-version-latest"] }
 aws-sdk-s3 = "1.135.0"
+dotenv = "0.15.0"
 poem = "3.1.12"
 tokio = { version = "1.52.3", features = ["full"] }
